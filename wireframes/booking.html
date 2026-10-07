@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Reserve a study room | Riverside Public Library</title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to main content</a>
+        <header class="site-header">
+            <div>
+                <p>
+                    <strong>Riverside Public Library</strong>
+                    <span>Adaptive Learning & Resource Portal</span>
+                </p>
+                <nav aria-label="Main">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="listing.html">Browse</a></li>
+                        <li><a href="booking.html" aria-current="page">Book</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main id="main">
+            <h1>Reserve a study room</h1>
+            <section aria-labelledby="f">
+                <h2 id="f">Your details</h2>
+                <p>All fields are required unless marked optional.</p>
+                <form action="#">
+                    <label for="name">Full name</label>
+                    <input id="name" name="name" autocomplete="name" required>
+
+                    <label for="email">Email address</label>
+                    <p class="hint" id="email-h">We will send your confirmation here.</p>
+                    <input type="email" id="email" name="email" autocomplete="email" aria-describedby="email-h" required>
+
+                    <label for="svc">Room</label>
+                    <select id="svc" name="svc">
+                        <option>Quiet Room A (2 people)</option>
+                        <option>Group Room B (8 people)</option>
+                        <option>Accessible Room C (6 people, step-free)</option>
+                    </select>
+
+                    <label for="date">Date of reservation</label>
+                    <input type="date" id="date" name="date" required>
+
+                    <label for="time">Start time</label>
+                    <input type="time" id="time" name="time" required>
+
+                    <label for="x">Attendees (number)</label>
+                    <p class="hint" id="x-h">Enter a number from 1-8.</p>
+                    <input id="x" name="x" aria-describedby="x-h">
+
+                    <p><button type="submit">Submit</button></p>
+                </form>
+            </section>
+            <aside aria-labelledby="a">
+                <h2 id="a">Need help</h2>
+                <p>Opening hours: Mon to Sat, 9:00 to 18:00. Step-free access at the main entrance.</p>
+            </aside>
+        </main>
+        <footer class="site-footer">
+            <div>
+                <p>Wireframe prototype for ticket MD-2026-0143. Contact us: 012 345 6789</p>
+            </div>
+        </footer>
+    </body>
+</html>
