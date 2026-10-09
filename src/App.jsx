@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import CourseDirectory from './components/CourseDirectory'
 
 const VIEWS = {
   home: "Home",
@@ -53,7 +54,7 @@ function App() {
 
       <main id='main' tabIndex={-1}>
         {view === 'home' && <Page title="Home" headingRef={headingRef}><p>Welcome.</p></Page>}
-        {view === 'courses' && <Page title="Course Catalogue" headingRef={headingRef}><p>Directory goes here.</p></Page>}
+        {view === 'courses' && <Page title="Course Catalogue" headingRef={headingRef}><CourseDirectory /></Page>}
         {view === 'book' && <Page title="Reserve a study room" headingRef={headingRef}><p>Form goes here.</p></Page>}
       </main>
 

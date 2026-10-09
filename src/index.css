@@ -1,111 +1,192 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --text: #1a1a1a;
+  --hint: #4d4d4d;
+  --border: #767676;
+  --white: #ffffff;
+  --light: #f2f2f2;
+  --header: #e0e0e0;
+  --black: #000000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+* {
+  box-sizing: border-box; /* padding stays inside the width */
 }
 
 body {
   margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+  font-family: system-ui, sans-serif;
+  font-size: 1rem; /* 1rem = the user's own font size */
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--white);
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+  font-size: 2rem;
 }
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.25rem;
+}
+
+a {
+  color: var(--text);
+  text-decoration: underline; /* underline shows it is a link, no colour needed */
+}
+
+main {
+  max-width: 64rem;
+  margin: 0 auto; /* centres the content */
+  padding: 1rem;
+}
+
+.site-header div,
+.site-footer div {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+section,
+article,
+aside {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.site-header,
+.site-footer {
+  background: var(--header);
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+}
+
+.site-footer {
+  border-top: 2px solid var(--border);
+  border-bottom: none;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap; /* links wrap onto a new line on small screens */
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Current page: bold and underlined, so it doesn't rely on colour */
+button[aria-current="page"] {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Hidden off-screen until someone tabs to it */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  padding: 0.75rem;
+  background: var(--white);
+  color: var(--text);
+  border: 2px solid var(--black);
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+article,
+aside,
+fieldset {
+  background: var(--light);
+  border: 2px solid var(--border);
+  padding: 1rem;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  max-width: 32rem;
+  padding: 0.6rem;
+  font-size: 1rem;
+  background: var(--white);
+  color: var(--text);
+  border: 2px solid var(--border);
+}
+
+/* Checkboxes should stay small */
+input[type="checkbox"] {
+  width: auto;
+}
+
+.hint {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--hint);
+}
+
+/* Errors use bold text and a thick left bar, not colour alone */
+.error {
+  font-weight: bold;
+  border-left: 6px solid var(--black);
+  padding-left: 0.5rem;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background: var(--white);
+  color: var(--text);
+  border: 2px solid var(--black);
+  cursor: pointer;
+}
+
+fieldset button {
+  margin: 0.25rem 0.5rem 0.25rem 0;
+}
+
+/* Pressed state: black fill AND a tick, so it doesn't rely on colour alone */
+button[aria-pressed="true"] {
+  background: var(--black);
+  color: var(--white);
+}
+
+button[aria-pressed="true"]::before {
+  content: "\2713  ";
+}
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Shows a thick black outline on whatever you tab to */
+:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 2px;
+}
+
+/* Stack the nav links in one column on narrow screens */
+@media (max-width: 40rem) {
+  nav ul {
+    flex-direction: column;
   }
 }
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* Turn off animations for people who ask their device for less motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none;
+    transition: none;
+  }
 }
