@@ -197,3 +197,15 @@ select[aria-invalid="true"] {
   border-width: 4px;
   border-style: dashed;
 }
+/* dialog stlying */
+dialog {
+  max-width: 32rem;
+  padding: 1.5rem;
+  background: var(--white);
+  color: var(--text);
+  border: 3px solid var(--black);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import ConfirmDialog from "./ConfirmDialog";
 
 const ROOMS = [
     { id: 'quiet-a', name: 'Quiet Room A', capacity: 2 },
@@ -77,6 +78,7 @@ function BookingForm() {
     const [errors, setErrors] = useState({})
     const [status, setStatus] = useState('')
     const [confirmed, setConfirmed] = useState(null)
+    const [pending, setPending] = useState(null)
 
     const confirmRef = useRef(null)
     const focusFormNext = useRef(false)
@@ -139,7 +141,16 @@ function BookingForm() {
 
         setStatus('')
         const room = ROOMS.find((r) => r.id === values.room)
-        setConfirmed({ ...values, roomName: room.name })
+        setPending({ ...values, roomName: room.name })
+    }
+
+    function handleConfirm() {
+        setConfirmed(pending)
+        setPending(null)
+    }
+
+    function handleCancel() {
+        setPending(null)
     }
 
     function startAgain() {
@@ -194,7 +205,7 @@ function BookingForm() {
                 >
                     <option value="">Choose a room</option>
                     {ROOMS.map((r) => (
-                        <option key={r.id} value={r.id}>{r.name} (ip to {r.capacity})</option>
+                        <option key={r.id} value={r.id}>{r.name} (up to {r.capacity})</option>
                     ))}
                 </Field>
                 <Field
@@ -218,6 +229,20 @@ function BookingForm() {
                     <button type="submit">Reserve room</button>
                 </p>
             </form>
+            <ConfirmDialog
+            open={pending !== null}
+            title="Review your booking"
+            onConfirm={handleConfirm}
+            onCancel={handleCancel}
+            >
+                {pending && (
+                    <p>
+                        {pending.roomName} for {pending.guests}{' '}
+                        {Number(pending.guests) === 1 ? 'person' : 'people'} on {pending.date} at{' '}
+                        {pending.time}. Confirmation goes to {pending.email}.
+                    </p>
+                )}
+            </ConfirmDialog>
         </section>
     )
 }
