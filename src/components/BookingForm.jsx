@@ -220,7 +220,7 @@ function BookingForm() {
                 onChange={handleChange} onBlur={handleBlur}
                 />
                 <Field
-                id="guests" label="Nuber of people" type="number" inputMode="numeric"
+                id="guests" label="Number of people" type="number" inputMode="numeric"
                 hint="The room you choose sets the maximum."
                 value={values.guests} error={errors.guests}
                 onChange={handleChange} onBlur={handleBlur}

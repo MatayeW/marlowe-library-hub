@@ -82,7 +82,7 @@ function CourseDirectory() {
             <h2 id="results-heading">Results</h2>
             {/* always on the page so screen readers are watching it */}
             <p role="status" aria-live="polite" aria-atomic="true">
-                {results.length} {results.length === 1 ? "course" : "courses"}
+                {results.length} {results.length === 1 ? "course" : "courses"} found
             </p>
 
             {results.length === 0 ? (
