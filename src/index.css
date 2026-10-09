@@ -190,3 +190,10 @@ button[aria-pressed="true"]::before {
     transition: none;
   }
 }
+
+/* invalid input field error text (thicker and dashed to not rely on colour) */
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-width: 4px;
+  border-style: dashed;
+}
