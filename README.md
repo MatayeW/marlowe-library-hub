@@ -2,7 +2,7 @@
 
 Prototype for ticket MD-2026-0143 (Marlowe Digital). Built to be fully usable by keyboard and screen reader.
 
-- **Live site:** deployed URL
+- **Live site:** deployed URL: https://marlowe-library-hub.vercel.app/
 - **Wireframes (Part A):** `/wireframes` (3 static pages, `main.css`, `persona.md`, `wcag-matrix.md`)
 - **App (Part B):** repository root (React + Vite)
 
