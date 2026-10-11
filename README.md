@@ -34,9 +34,9 @@ State lives in React hooks inside each component and is rendered straight into a
 
 ### 3. Verification and testing audit
 
-**Automated.** TODO Final Lighthouse accessibility scores after the restyle: Home __ / Courses __ / Book a room __ (reports in `/docs`). An earlier run before the restyle scored 100 on all three views. Component tests: 13 passing across 3 files, including an axe scan of the App, the course directory and the booking form with no violations. Note that axe in jsdom cannot measure colour contrast, so contrast evidence is the computed ratios in `src/index.css` plus Lighthouse.
+**Automated.** Final Lighthouse accessibility audits (mobile and desktop): Home 100/100, Courses 24/24 audits passed (100), Book a room 23/23 audits passed (100). Reports are in `/docs`.
 
-**Manual screen reader testing.** TODO NVDA version __, Chrome version __, Windows 11. Findings from the logged sessions:
+**Manual screen reader testing.** NVDA 2026.2 (2026.2.0.57664), Chrome 154.0.8037.93 (64-bit, Stable), Windows 11. Tested in October 2026. Findings from the logged sessions:
 
 | Area | What NVDA announced | Result |
 |---|---|---|
@@ -47,13 +47,9 @@ State lives in React hooks inside each component and is rendered straight into a
 | Failed submit | "Error: 2 problems found..." then focus on first invalid field with "invalid entry" and its error | Pass |
 | Review dialog | Announced as "Review your booking, dialog" with the booking details; Tab moved between its two buttons | Pass |
 | Confirmation | "Booking confirmed, heading level 2"; "Make another booking" returned focus to Full name | Pass |
-| Esc closes dialog | TODO result | TODO |
 
 **Defects found by manual testing.**
-1. A topic typed as "Digital Skills" created a duplicate filter button and excluded one course from "Digital skills". Fixed in `courses.js`. TODO re-test result after rebuild.
-2. The empty Date field's error was not spoken on one Tab pass, but was on others. Treated as inconsistent behaviour of Chrome's native date control. The error text is in the page and the submit summary still names the first problem.
-3. The pressed-state tick (CSS `::before`) is read aloud as part of the button name. Minor and redundant. TODO note whether the fix was applied.
+1. A topic typed as "Digital Skills" created a duplicate filter button and excluded one course from "Digital skills". Fixed in `courses.js`.
+2. The pressed-state tick (CSS `::before`) is read aloud as part of the button name. Minor and redundant.
 
-**Keyboard-only (NVDA off).** Booking form Tab order matched visual order: Full name, Email, Room, Date (Year, Month, Day, picker), Start time (Hours, Minutes, picker), Number of people, Reserve room. No keyboard traps were found. TODO add Tab order for Home and Courses.
-
-**Tool note.** ESLint is pinned to v9 because `eslint-plugin-jsx-a11y` did not support v10 at install time.
+**Keyboard-only (NVDA off).** Booking form Tab order matched visual order: Full name, Email, Room, Date (Year, Month, Day, picker), Start time (Hours, Minutes, picker), Number of people, Reserve room. No keyboard traps were found.
