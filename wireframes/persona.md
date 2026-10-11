@@ -8,7 +8,7 @@
 | Item | Detail |
 |---|---|
 | Computer / OS | Windows 11 |
-| Browser | Firefox, with page zoom usually set to 300% |
+| Browser | Chrome, with page zoom usually set to 300% |
 | Magnifier | Windows Magnifier at 300%, high contrast theme on |
 | Screen reader | NVDA at about 60% speech rate, used mainly for reading long text and forms |
 | Phone | iPhone with VoiceOver and Larger Text turned on |
