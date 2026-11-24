@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ConfirmDialog from "./ConfirmDialog";
+import Field from "./Field";
 
 const ROOMS = [
     { id: 'quiet-a', name: 'Quiet Room A', capacity: 2 },
@@ -8,6 +9,16 @@ const ROOMS = [
 ]
 
 const FIELD_ORDER = ['name', 'email', 'room', 'date', 'time', 'guests']
+
+// Names read out when an error is announced as someone leaves a field
+const LABELS = {
+    name: 'Full name',
+    email: 'Email address',
+    room: 'Room',
+    date: 'Date',
+    time: 'Start time',
+    guests: 'Number of people',
+}
 
 const EMPTY = { name: '', email: '', room: '', date: '', time: '', guests: ''}
 
@@ -55,28 +66,11 @@ function validate(values) {
     return errors
 }
 
-function Field({ id, label, hint, error, as = 'input', children, ...props }) {
-    const hintId = `${id}-hint`
-    const errorId = `${id}-error`
-    const describedBy =
-    [hint ? hintId : null, error ? errorId : null].filter(Boolean).join(" ") || undefined
-    const Control = as
-
-    return (
-        <div>
-            <label htmlFor={id}>{label}</label>
-            {hint && <p className="hint" id={hintId}>{hint}</p>}
-            {error && <p className="error" id={errorId}>Error: {error}</p>}
-            <Control id={id} name={id} aria-invalid={error ? 'true' : 'false'}
-            aria-describedby={describedBy} {...props}>{children}</Control> 
-        </div>
-    )
-}
-
 function BookingForm() {
     const [values, setValues] = useState(EMPTY)
     const [errors, setErrors] = useState({})
     const [status, setStatus] = useState('')
+    const [statusCount, setStatusCount] = useState(0) // new key each time so the same message is announced again
     const [confirmed, setConfirmed] = useState(null)
     const [pending, setPending] = useState(null)
 
@@ -92,6 +86,12 @@ function BookingForm() {
             focusFormNext.current = false
         }
     }, [confirmed])
+
+    // Put a message in the live region (empty string clears it)
+    function announce(message) {
+        setStatus(message)
+        setStatusCount((n) => n + 1)
+    }
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -122,6 +122,8 @@ function BookingForm() {
             else delete updated[name]
             return updated
         })
+        // Say the error out loud now, while the person is leaving the field
+        announce(fresh[name] ? `Error: ${LABELS[name]}. ${fresh[name]}` : '')
     }
 
     function handleSubmit(e) {
@@ -132,14 +134,14 @@ function BookingForm() {
         const invalid = FIELD_ORDER.filter((k) => found[k])
         if (invalid.length > 0) {
             const count = invalid.length
-            setStatus(
+            announce(
                 `Error: ${count} ${count === 1 ? 'problem' : 'problems'} found. ${found[invalid[0]]}`
             )
             document.getElementById(invalid[0])?.focus()
             return
         }
 
-        setStatus('')
+        announce('')
         const room = ROOMS.find((r) => r.id === values.room)
         setPending({ ...values, roomName: room.name })
     }
@@ -183,7 +185,7 @@ function BookingForm() {
 
             {/* Always on the page so screen readers are already watching it */}
             <div aria-live="assertive" aria-atomic="true">
-                {status && <p className="error">{status}</p>}
+                {status && <p key={statusCount} className="error">{status}</p>}
             </div>
 
             <form onSubmit={handleSubmit} noValidate>

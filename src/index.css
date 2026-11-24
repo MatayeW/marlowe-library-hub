@@ -160,7 +160,8 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   max-width: 32rem;
   padding: 0.7rem 0.8rem;
@@ -169,6 +170,7 @@ select {
   color: var(--text);
   border: 2px solid var(--border);
   border-radius: 0.6rem;
+  font-family: inherit;
 }
 
 /* Checkboxes should stay small */
@@ -193,7 +195,8 @@ input[type="checkbox"] {
 
 /* Invalid fields to be thicker and have dashed border as well as the message */
 input[aria-invalid="true"],
-select[aria-invalid="true"] {
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
   border-width: 4px;
   border-style: dashed;
   border-color: var(--error);

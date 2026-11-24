@@ -60,4 +60,25 @@ describe('Booking Form', () => {
         const heading = screen.getByRole('heading', { name: 'Booking confirmed' })
         expect(heading).toHaveFocus()
     })
+
+    it('announces the error as soon as someone leaves an empty field', async () => {
+        const user = userEvent.setup()
+        render(<BookingForm />)
+        const live = document.querySelector('[aria-live="assertive"]')
+        await user.click(screen.getByLabelText('Full name'))
+        await user.tab() // leave the field without typing
+        expect(live).toHaveTextContent('Error: Full name. Enter your full name.')
+    })
+
+    it('clears the announcement when the field is fixed and left', async () => {
+        const user = userEvent.setup()
+        render(<BookingForm />)
+        const live = document.querySelector('[aria-live="assertive"]')
+        await user.click(screen.getByLabelText('Full name'))
+        await user.tab()
+        await user.click(screen.getByLabelText('Full name'))
+        await user.type(screen.getByLabelText('Full name'), 'Remi')
+        await user.tab()
+        expect(live).toBeEmptyDOMElement()
+    })
 })

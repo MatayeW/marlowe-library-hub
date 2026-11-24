@@ -1,4 +1,19 @@
 /* Colours */
+/*
+   Computed contrast ratios (WCAG 2.1 relative luminance formula)
+   Text, needs 4.5:1 (1.4.3)
+     --text   #1a1a1a on --white  #ffffff = 17.40:1
+     --text   #1a1a1a on --light  #f2f2f2 = 15.55:1  (article, aside, fieldset)
+     --text   #1a1a1a on --header #e0e0e0 = 13.18:1  (header, footer)
+     --hint   #4d4d4d on --white  #ffffff =  8.45:1  (hint text)
+     --hint   #4d4d4d on --light  #f2f2f2 =  7.55:1  (hint text inside cards)
+   Non-text, needs 3:1 (1.4.11)
+     --border #767676 on --white  #ffffff =  4.54:1  (input borders)
+     --border #767676 on --light  #f2f2f2 =  4.06:1  (card and fieldset borders)
+     --border #767676 on --header #e0e0e0 =  3.44:1  (header and footer borders)
+     --black  #000000 on --white  #ffffff = 21.00:1  (focus ring, button borders)
+     --black  #000000 on --light  #f2f2f2 = 18.76:1  (focus ring inside cards)
+*/
 :root {
     --text: #1a1a1a;
     --hint: #4d4d4d;

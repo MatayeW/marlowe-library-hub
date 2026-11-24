@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 import { axe } from "vitest-axe";
@@ -40,5 +40,19 @@ describe('CourseDirectory', () => {
         await user.click(online)
         expect(online).toHaveAttribute('aria-pressed', 'true')
         expect(screen.getByRole('status')).toHaveTextContent('2 courses found')
+    })
+
+    it('starts with a search passed in from Home', () => {
+        render(<CourseDirectory initialQuery="spanish" />)
+        expect(screen.getByLabelText('Search courses')).toHaveValue('spanish')
+        expect(screen.getByRole('status')).toHaveTextContent('1 course found')
+    })
+
+    it('gives every course a Register button that passes the course on', async () => {
+        const user = userEvent.setup()
+        const onRegister = vi.fn()
+        render(<CourseDirectory onRegister={onRegister} />)
+        await user.click(screen.getByRole('button', { name: 'Register for Spreadsheets Made Simple' }))
+        expect(onRegister).toHaveBeenCalledWith(expect.objectContaining({ id: 4 }))
     })
 })

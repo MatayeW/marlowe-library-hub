@@ -24,8 +24,8 @@ function FilterGroup({ legend, options, selected, onToggle }) {
     )
 }
 
-function CourseDirectory() {
-    const [query, setQuery] = useState("")
+function CourseDirectory({ initialQuery = "", onRegister = () => {} }) {
+    const [query, setQuery] = useState(initialQuery)
     const [formats, setFormats] = useState([])
     const [topics, setTopics] = useState([])
     const [filtersOpen, setFiltersOpen] = useState(false)
@@ -65,7 +65,7 @@ function CourseDirectory() {
             <h3>
                 <button type="button" aria-expanded={filtersOpen} aria-controls="filter-panel"
                 onClick={() => setFiltersOpen(!filtersOpen)} >
-                    Filters{activeCount > 0 ? ` (${activeCount} active` : ""}
+                    Filters{activeCount > 0 ? ` (${activeCount} active)` : ""}
                 </button>
             </h3>
             <div id="filter-panel" hidden={!filtersOpen}>
@@ -95,6 +95,10 @@ function CourseDirectory() {
                                 <h3>{course.title}</h3>
                                 <p>{course.format} | {course.topic}</p>
                                 <p>{course.description}</p>
+                                <p>
+                                    <button type="button" aria-label={`Register for ${course.title}`}
+                                    onClick={() => onRegister(course)}>Register</button>
+                                </p>
                             </article>
                         </li>
                     ))}
