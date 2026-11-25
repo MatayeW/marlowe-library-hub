@@ -37,7 +37,7 @@ State lives in React hooks inside each component and is rendered straight into a
 
 ### 3. Verification and testing audit
 
-**Automated.** Final Lighthouse accessibility audits (mobile and desktop): Home 100/100, Courses 24/24 audits passed (100), Book a room 23/23 audits passed (100). Reports are in `/docs`.
+**Automated.** Final Lighthouse accessibility audits (mobile and desktop): Home 100/100, Courses 24/24 audits passed (100), Book a room 23/23 audits passed (100), Registration (mobile and desktop) 22/22 audits passed (100). Reports are in `/docs`.
 
 **Manual screen reader testing.** NVDA 2026.2 (2026.2.0.57664), Chrome 154.0.8037.93 (64-bit, Stable), Windows 11. Tested in October 2026. Findings from the logged sessions:
 
